@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link rel="stylesheet" href="/stylesheets/bootstrap.css"></link>
+</head>
+
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<script type="text/javascript" src="/javascripts/ajaxAction.js"></script>
+<script type="text/javascript" src="/javascripts/jpager.js"></script>
+<script type="text/javascript" src="/javascripts/target.js"></script>
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="panel panel-default">
+				<div class="panel-heading"></div>
+				<div class="panel-body"></div>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>名字</th>
+							</tr>
+						</thead>
+						<tbody id="user-content">
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<nav>
+					<ul id="page-content" class="pagination">
+					</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	var options = {
+		type : 'bdPage',//分页类型
+		url : '/test/api/users',//请求路径
+		totalName : 'total',//返回记录数的名称
+		pageName : 'page',//返回前页的名称
+		sizeName : 'size',//返回每一页显示记录数的名称
+	};
+	var formatter = {
+		pageDom : '#page-content',//分页信息显示节点的selector
+		name : 'pageData',//分页信息在返回结果集的字段名称
+		pageClass : 'active',//当前页显示是用的样式
+		pageName : 'page',//分页数据每页多少当前页的名称
+		totalName : 'total',//分页数据每页多少总记录的名称
+		sizeName : 'size',//分页数据每页多少记录的名称
+	};
+	//后台模拟返回的数据，建议使用express，比较容易调试
+	//{"list":[{"id":1,"name":"yang"},{"id":2,"name":"hai"}],"pageData":{"size":10,"page":2,"total":12}}
+	//默认加载
+	HashPageController.defaultLoad(new Target(), options, formatter);
+	//正常方式加载
+	//var hashPageCtrl = new HashPageController(new Target(), options, formatter);
+	//hashPageCtrl.start(1, 10);
+</script>
+</html>
